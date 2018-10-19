@@ -18,11 +18,14 @@ Most of these tools and libraries, however, have one glaring limitation. They
 require loading and operating on the the entire dataset. This precludes their
 use with data too large to fit into memory or to render at once. Even with
 smaller datasets, issues such as occlusion and overplotting can make it
-difficult to explore and analyze data.
-
-This need not be the case. We already have techniques that allow us to break
+difficult to explore and analyze data. This need not be the case. 
+We already have techniques that allow us to break
 down large datasets into smaller, digestible chunks which can be displayed
-without overwhelming the rendering library or viewer. Online maps, for
+without overwhelming the rendering library or viewer. 
+
+#### Inspired by maps
+
+Online maps, for
 example, are a de-facto visualization of terabyte-scale datasets. They rely on
 a very simple principle: only render what is relevant at a given scale and
 location. Modern "slippy maps" partition data into <i>tiles</i> which are indexed
