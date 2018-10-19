@@ -17,15 +17,15 @@
         {% if page.thumbnail %}<meta name="og:image" content="{{ page.thumbnail }}" />{% endif %}
 
         <!-- syntax highlighting CSS -->
-        <link rel="stylesheet" href="/css/syntax.css">
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="/css/font-awesome-4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ 'css/syntax.css' | prepend: site.baseurl }}">
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="{{ 'css/font-awesome-4.2.0/css/font-awesome.min.css' | prepend: site.baseurl }}">
 
         <!-- Custom CSS -->
         <!-- link rel="stylesheet" href="/css/main.css" -->
 
-	<link rel="stylesheet" href="/css/the.css">
-	<link rel="stylesheet" href="/css/wp.css">
+	<link rel="stylesheet" href="{{ 'css/the.css' | prepend: site.baseurl }}">
+	<link rel="stylesheet" href="{{ '/css/wp.css' | prepend: site.baseurl }}">
 
     </head>
   <body itemscope itemtype="http://schema.org/Product" >
