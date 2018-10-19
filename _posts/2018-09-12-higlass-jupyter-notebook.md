@@ -136,7 +136,7 @@ flexible, more accessible and more low level.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
 
 <script src="https://unpkg.com/higlass@1.2.8/dist/hglib.js"></script>
-<script src="js/higlass-jupyter-notebook/index.js"></script>
+<script src="{{ '/js/higlass-jupyter-notebook/index.js' | prepend: site.baseurl }}"></script>
 
 <script>
 </script>
