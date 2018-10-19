@@ -1,3 +1,10 @@
+// three heatmaps with viewport projections
+hglib.viewer(
+        document.getElementById('maps-and-tiles'),
+        "https://higlass.io/api/v1//viewconfs/?d=dRp3cYjPTfiUPzjeXoBkcA",
+        { bounded: true, editable: false }
+    );
+
 // F09GKDv2RS-Qwkhqa8rYHA
 // 
 hglib.viewer(
@@ -6,10 +13,10 @@ hglib.viewer(
         { bounded: true, editable: false }
     );
 
-
+// 
 hglib.viewer(
-        document.getElementById('maps-and-tiles'),
-        "https://higlass.io/api/v1//viewconfs/?d=dRp3cYjPTfiUPzjeXoBkcA",
+        document.getElementById('three-heatmaps'),
+        "https://higlass.io/api/v1//viewconfs/?d=Y7FtjugjR6OIV_P2DRqCSg",
         { bounded: true, editable: false }
     );
 
