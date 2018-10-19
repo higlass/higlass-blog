@@ -70,10 +70,11 @@ a img.aligncenter {
 }
 
 .wp-caption p.wp-caption-text {
-    font-size: 11px;
-    line-height: 17px;
+    font-size: 14px;
+    line-height: 1.5;
     margin: 0;
     padding: 0 4px 0px;
+    color: #777;
 }
 
 /* Text meant only for screen readers. */

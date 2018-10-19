@@ -2,9 +2,10 @@
 // 
 hglib.viewer(
         document.getElementById('two-heatmaps'),
-        "https://higlass.io/api/v1//viewconfs/?d=VrJGW-aBSEaJ4y9y-LCMmQ",
+        "https://higlass.io/api/v1//viewconfs/?d=CL_lVumdTWKbTCE9n556ZQ",
         { bounded: true, editable: false }
     );
+
 
 hglib.viewer(
         document.getElementById('maps-and-tiles'),

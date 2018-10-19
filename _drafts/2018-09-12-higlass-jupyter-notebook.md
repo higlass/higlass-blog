@@ -23,10 +23,9 @@ We already have techniques that allow us to break
 down large datasets into smaller, digestible chunks which can be displayed
 without overwhelming the rendering library or viewer. 
 
-#### Inspired by maps
+## Inspired by maps
 
-Online maps, for
-example, are a de-facto visualization of terabyte-scale datasets. They rely on
+Online maps, for example, are a de-facto visualization of terabyte-scale datasets. They rely on
 a very simple principle: only render what is relevant at a given scale and
 location. Modern "slippy maps" partition data into <i>tiles</i> which are indexed
 using three integers:
@@ -44,21 +43,32 @@ loaded at any given time. By limiting the amount of data contained in each tile
 and the number of tiles visible at any given time, we effectively limit the
 amount of data that needs to be rendered.
 
-<div id="maps-and-tiles" style="width: 550px; height: 300px"> </div>
-(Example of HiGlass displaying tile #s)
+<div class="wp-caption alignleft" style="width: 550px; margin-bottom: 15px">
+	<div id="maps-and-tiles" style="height: 300px"> </div>
+	<p class="wp-caption-text">Online maps are rendered by retrieving and stitching
+	together small images called *tiles*. The view on the right shows the tiles that
+	make up the zoomable map on the left.</p>
+</div>
 
 Can we apply the same technique to other types of data? Of course.
 
-<b>HiGlass</b>
+<h2>HiGlass</h2>
 
 Over the past two and a half years we created HiGlass, a multiscale viewer for
-any type of large data. The principle is the same as in online maps. You can
+any type of large data. The interaction is the same as in online maps. You can
 pan and zoom and we only request resolution- and location- relevant data from
 the server. **No matter how much data there is, the browser is never overloaded
 and interaction remains smooth and responsive.** For proof, here is a 3 million 
 by 3 million matrix displayed in a web browser.
 
-<div id="two-heatmaps" style="width: 550px; height: 300px"></div>
+<div class="wp-caption alignleft" style="width: 550px; margin-bottom: 15px">
+	<div id="two-heatmaps" style="height: 300px"></div>
+	<p class="wp-caption-text">Using a maps-like, tile based rendering, we can interactively
+	navigate massive 3 million x 3 million matrices. On the left is just matrix
+	and on the right is the matrix with an overlay showing the locations of the
+	individual tiles. Because we are rendering directly on the client, we can adjust
+	the color scale without having to re-retrieve data from the server.</p>
+</div>
 
 <br />
 So how does this work? There's two key requirements:
@@ -71,6 +81,20 @@ simply a summation of adjacent cells. To retrieve subsets, we simply extract
 slices of the matrix. In the example above, the downsampling has been
 precomputed for each zoom level and stored in the cooler file format. Tile
 requests are fulfilled by a HiGlass server running on an Amazon EC2 instance. 
+
+<h2>Custom data sources</h2>
+
+The example set by online maps can be adopted by nearly any other spatial-like
+data. As long as we can downsample our data and partition it into tiles, we can
+create a server component to power HiGlass. This lightweight server needs to
+implement two functions: `tileset_info` for returning the bounds and depth of
+the dataset and `tiles(z,x,y)` for obtaining data at zoom level z, and position
+x,y.
+
+With these two functions, we can create multi-resolution displays for any
+datatype. To get started, we've created a number of tile generators in the
+[https://github.com/pkerpedjiev/hgtiles](https://github.com/pkerpedjiev/hgtiles)
+repository.
 
 <b> HiGlass Jupyter </b>
 
@@ -102,18 +126,6 @@ types that could be used to store large datasets? We needed something more
 flexible, more accessible and more low level.
 
 <b> Custom tile generation </b>
-
-The example set by online maps can be adopted by nearly any other spatial-like
-data. As long as we can downsample our data and partition it into tiles, we can
-create a server component to power HiGlass. This lightweight server needs to
-implement two functions: `tileset_info` for returning the bounds and depth of
-the dataset and `tiles(z,x,y)` for obtaining data at zoom level z, and position
-x,y.
-
-With these two functions, we can create multi-resolution displays for any
-datatype. To get started, we've created a number of tile generators in the
-[https://github.com/pkerpedjiev/hgtiles](https://github.com/pkerpedjiev/hgtiles)
-repository.
 
 
 <link rel="stylesheet" href="https://unpkg.com/higlass@1.1.5/dist/styles/hglib.css" type="text/css">
