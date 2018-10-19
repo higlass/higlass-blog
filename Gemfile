@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'jekyll-feed'
+gem 'jekyll-paginate'
+gem 'redcarpet'
+gem 'jekyll-watch'
+gem 'rouge'
+gem 'jekyll'
