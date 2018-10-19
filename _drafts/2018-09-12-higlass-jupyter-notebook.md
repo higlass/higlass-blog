@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Big data visualization in a Jupyter notebook using HiGlass"
-description: "Using HiGlass from within a Jupyter notebook to view and explore large datasets."
+title:  "Big data visualization using HiGlass"
+description: "Using HiGlass to view and explore large datasets."
 tags: higlass jupyter python
 thumbnail: 
 ---
@@ -71,6 +71,14 @@ requests are fulfilled by a HiGlass server running on an Amazon EC2 instance.
 
 <b> HiGlass Jupyter </b>
 
+<div class="wp-caption alignleft" style="width: 275px">
+	<div id="mandelbrot" style="height: 400px"></div>
+	<p class="wp-caption-text">The Mandelbrot set can be rendered as a multiscale dataset. 
+	Zooming, limited to 25 levels to avoid hitting floating point precision
+	artifacts.</p>
+</div>
+<br />
+
 There's no better way to experiment with code than to run it in an interactive
 environment. The gold standard in exploratory programming in Python is the
 Jupyter notebook. It lets you compose, modify and run snippets of code
@@ -107,12 +115,12 @@ repository.
 
 <link rel="stylesheet" href="https://unpkg.com/higlass@1.1.5/dist/styles/hglib.css" type="text/css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.5.4/react-dom.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.2/pixi.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.31.0/react-bootstrap.min.js"></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.1/pixi.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
 
-<script src="https://unpkg.com/higlass@1.2.3/dist/scripts/hglib.js"></script>
+<script src="https://unpkg.com/higlass@1.2.8/dist/hglib.js"></script>
 <script src="/js/higlass-jupyter-notebook/index.js"></script>
 
 <script>
