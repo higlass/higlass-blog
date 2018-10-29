@@ -147,14 +147,44 @@ at 1Kb resolution, zoom level 13 will contain data at 2Kb resolution, zoom level
 12 at 4Kb, etc. If we know the original resolution of our data, we can calculate
 the number of zoom levels required to end up with one tile at the lowest resolution:
 
-```
+```python
 bins_per_tile = 256 	# the default, but can be set to anything
 base_resolution = 1000  # 1Kb data coming in
 
 tilesize = bins_per_tile * base_resolution
+n_tiles = math.ceil(datasize / tilesize)
 
-If each tile contains n bins along each dimension, then the position of the tile
-can be calculated.
+max_zoom = int(np.ceil(np.log2(n_tiles)))
+```
+
+Slicing data from the data matrix requires determining which rows and columns should
+be included in the tile.
+
+```
+tile_width = 2 ** (max_zoom - z) * bins_per_dimension
+
+x_start = tile_x * tile_width
+y_start = tile_y * tile_width
+
+x_end = min(matrix.shape[0], x_start + tile_width)
+y_end = min(matrix.shape[1], y_start + tile_width)
+
+raw_tile = matrix[x_start:x_end,y_start:y_end]
+```
+
+And because this function is operating on the original, unaggregated, data and
+`tile_width` could be large we need to apply our downsampling aggregation function:
+
+```
+num_to_sum = 2 ** (max_zoom - z)
+downsampled_tile = (np.nansum(
+	raw_tile.T.reshape(raw_tile.shape[1],-1,num_to_sum),
+	axis=2).T)
+```
+
+Note that for larger datasets, such as our Hi-C matrices, we pre-downsample
+the data for each zoom level so when a request hits the server, we can just
+quickly look up and retrieve the data for that zoom level.
 
 <h2>HiGlass</h2>
 
@@ -181,7 +211,7 @@ So how does this work? There's two key requirements:
 2. A method of retrieving subsets of the data corresponding to the visible region
 
 In the case of matrices, this is quite simple. The downsampling function is
-simply a summation of adjacent cells. To retrieve subsets, we simply extract
+simply a summation of adjacent cells. To retrieve subsets, we extract
 slices of the matrix. In the example above, the downsampling has been
 precomputed for each zoom level and stored in the cooler file format. Tile
 requests are fulfilled by a HiGlass server running on an Amazon EC2 instance. 
