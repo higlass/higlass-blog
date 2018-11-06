@@ -2,7 +2,7 @@
 layout: post
 title:  "Big data visualization using HiGlass"
 description: "Using HiGlass to view and explore large datasets."
-tags: higlass jupyter python
+tags: higlass python
 thumbnail: 
 ---
 
@@ -290,7 +290,7 @@ server implementation to provision it with manageable chunks of data to view.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
 
 <script src="https://unpkg.com/higlass@1.2.8/dist/hglib.js"></script>
-<script src="{{ '/js/higlass-jupyter-notebook/index.js' | prepend: site.baseurl }}"></script>
+<script src="{{ '/js/higlass-overview/index.js' | prepend: site.baseurl }}"></script>
 
 <script>
 </script>
