@@ -137,15 +137,16 @@ array([[11, 12],
 ## Tiling
 
 With downsampling and slicing functions, we're ready to generate tiles. The
-zoom level of each tile corresponds to the level of downsampling of the original
-data. If we follow the example of online maps, the lowest zoom level, 0, will
-contain the entire matrix. The highest zoom level, 14, in our case will contain
-the original data. All the zoom levels in between will contain data at resolutions
-which are powers of two multiples of the original resolution. 
-So zoom level 14 will contain data
-at 1Kb resolution, zoom level 13 will contain data at 2Kb resolution, zoom level
-12 at 4Kb, etc. If we know the original resolution of our data, we can calculate
-the number of zoom levels required to end up with one tile at the lowest resolution:
+zoom level of each tile corresponds to the level of downsampling of the
+original data. If we follow the example of online maps, the lowest zoom level,
+0, will contain the entire matrix. The highest zoom level, 14, in our case
+will contain the original data. All the zoom levels in between will contain
+data at resolutions which are powers of two multiples of the original
+resolution.  So zoom level 14 will contain data at 1Kb resolution, zoom level
+13 will contain data at 2Kb resolution, zoom level 12 at 4Kb, etc. If we know
+the original resolution of our data, we can calculate the number of zoom
+levels required to end up with one tile at the lowest resolution (thanks
+to [@nv1ctus](https://twitter.com/nv1ctus?lang=en) for the snippet below):
 
 ```python
 bins_per_tile = 256 	# the default, but can be set to anything
@@ -156,6 +157,7 @@ n_tiles = math.ceil(datasize / tilesize)
 
 max_zoom = int(np.ceil(np.log2(n_tiles)))
 ```
+
 So if our dataset has 3 billion rows and columns, then `max_zoom` will be 14.
 
 Slicing data from the data matrix requires determining which rows and columns should
