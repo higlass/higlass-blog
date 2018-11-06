@@ -136,7 +136,7 @@ array([[11, 12],
 
 ## Tiling
 
-With a downsampling and slicing functions, we're ready to generate tiles. The
+With downsampling and slicing functions, we're ready to generate tiles. The
 zoom level of each tile corresponds to the level of downsampling of the original
 data. If we follow the example of online maps, the lowest zoom level, 0, will
 contain the entire matrix. The highest zoom level, 14, in our case will contain
@@ -156,6 +156,7 @@ n_tiles = math.ceil(datasize / tilesize)
 
 max_zoom = int(np.ceil(np.log2(n_tiles)))
 ```
+So if our dataset has 3 billion rows and columns, then `max_zoom` will be 14.
 
 Slicing data from the data matrix requires determining which rows and columns should
 be included in the tile.
@@ -205,61 +206,78 @@ by 3 million matrix displayed in a web browser.
 </div>
 
 <br />
-So how does this work? There's two key requirements:
 
-1. A method of downsampling the data
-2. A method of retrieving subsets of the data corresponding to the visible region
+This data spans over 3 billion base pairs. At the highest resolution, each
+pixel represents the number of contacts between two 1 kilo-base regions of the
+genome. The data is is pre-aggregated at 14 levels of resolution and stored on
+disk as HDF5 matrices according to the schema defined by the  [cooler
+format](http://github.com/mirnylab/cooler). The server, running on an AWS EC2
+instance, fulfills each client tile request by slicing out the relevant region
+and returning it as a JSON object containing a base64 formatted string.
+Combining tile extraction with a caching server leads to 99% of responses
+being generated in less than 100ms. With a good internet connection, this
+makes for a fast, responsive user  experience when browsing the data.
 
-In the case of matrices, this is quite simple. The downsampling function is
-simply a summation of adjacent cells. To retrieve subsets, we extract
-slices of the matrix. In the example above, the downsampling has been
-precomputed for each zoom level and stored in the cooler file format. Tile
-requests are fulfilled by a HiGlass server running on an Amazon EC2 instance. 
+
 
 <h2>Tiling other types of data</h2>
 
 The example set by online maps can be adopted by nearly any other spatial-like
-data. As long as we can downsample our data and partition it into tiles, we can
-create a server component to power HiGlass. This lightweight server needs to
-implement two functions: `tileset_info` for returning the bounds and depth of
-the dataset and `tiles(z,x,y)` for obtaining data at zoom level z, and position
-x,y.
-
-With these two functions, we can create multi-resolution displays for any
-datatype. To get started, we've created a number of tile generators in the
-[https://github.com/pkerpedjiev/hgtiles](https://github.com/pkerpedjiev/hgtiles)
-repository.
-
-<b> HiGlass Jupyter </b>
+data. As long as we can downsample our data and partition it into tiles, we
+can create a server component to power HiGlass. The previous example showed
+how matrices can be downsampled and decomposed into tiles. In this section we
+will demonstrate how we can use a generic function to generate tiles for
+HiGlass.
 
 <div class="wp-caption alignleft" style="width: 275px">
-	<div id="mandelbrot" style="height: 400px"></div>
-	<p class="wp-caption-text">The Mandelbrot set can be rendered as a multiscale dataset. 
-	Zooming, limited to 25 levels to avoid hitting floating point precision
-	artifacts. <a href="http://higlass.io/app/?config=X36M4xrtS3iPFCp7cFigUQ">[fullscreen]</a></p>
+    <div id="mandelbrot" style="height: 400px"></div>
+    <p class="wp-caption-text">The Mandelbrot set can be rendered as a multiscale dataset. 
+    Zooming, limited to 25 levels to avoid hitting floating point precision
+    artifacts. <a href="http://higlass.io/app/?config=X36M4xrtS3iPFCp7cFigUQ">[fullscreen]</a></p>
 </div>
 <br />
 
-There's no better way to experiment with code than to run it in an interactive
-environment. The gold standard in exploratory programming in Python is the
-Jupyter notebook. It lets you compose, modify and run snippets of code
-interspersed with documentation and markdown-formatted text.  More than that,
-it lets you immediately see and record the output of your code.  This is
-invaluable for exploring data and quickly prototyping new code.
+According to Wikipedia, "The Mandelbrot set is the set of complex numbers $c$
+for which the function $f_{c}(z)=z^{2}+c$ does not diverge
+when iterated from $z=0$, i.e., for which the sequence  $f_{c}(0)$, 
+$f_{c}(f_{c}(0))$, etc., remains bounded in absolute value." The essence of
+this definition is that for any complex number, $c$, we can calculate whether
+it is part of the Mandelbrot set by iteratively applying $f_{c}$. Furthermore,
+for any complex number $c$, we can calculate how many times (i.e. iterations)
+we need to apply $f_{c}$ before the absolute value of $c$ exceeds a certain
+threshold (e.g. 2). Because a complex number can be represented by two components,
+the real and the imaginary, any pixel with a $x$ and
+the $y$ value can be used to represent a complex number. By counting the number
+of iterations it takes to exceed the threshold we can calculate a color for 
+each pixel and render the traditional Mandelbrot set (Figure 3).
 
-To avail ourselves of these opportunities, we created a version of HiGlass that
-can be run directly within a Jupyter notebook
-([https://github.com/pkerpedjiev/higlass-jupyter](https://github.com/pkerpedjiev/higlass-jupyter)).
-We can now open up our large datasets and explore them directly within a
-Jupyter notebook. Options that required UI interaction to change can be
-specified in code and shared with collaborators. The only limitation was the
-file type support coded into the HiGlass server. Because HiGlass began as a
-viewer for genomic data, the server has support for a handful of genomics
-related formats. But what about the mountains of other file, data and object
-types that could be used to store large datasets? We needed something more
-flexible, more accessible and more low level.
+So what about zooming? If we assign scales to the x- and y- axes of a figure
+and modify them as the user zooms in and out, then we can partition the figure
+into a grid of (x,y) pairs and iteratively calculate $f_{c}$ on the coordinates of
+each cell in the grid. As we zoom in, the granularity of the grid increases,
+the distance between cells shrinks and we have to recalculate the $f_{c}$ on
+the new grid. Using the tile-based approach described above, we can divide our
+grid into 256x256 tiles and offload the calculations to the server (AWS Lambda
+code available [as a gist here](https://gist.github.com/pkerpedjiev/567cb2d2879d66f1e862d4d28c33f418)).
+**With a server-side tile API, we can use the standard HiGlass
+heatmap track to view the Mandelbrot set at multiple levels of resolution
+without having to pre-calculate anything or do heavy processing on the
+client**. Interestingly, in this case, while we are taking slices of a window,
+we don't have the highest resolution data. So instead of downsampling, we rely
+on a form of upsampling to calculate a higher resolution rendering of a smaller
+region.
 
-<b> Custom tile generation </b>
+<h2>Summary</h2>
+
+The three examples presented: online maps, large matrices, and the Mandelbrot
+set demonstrate three separate use cases where classical z, x, y indexed
+tiling can be used to display datasets far too large to display at once. By
+down/up-sampling and slicing, we can provide the client with only the data
+that it needs to display at the current zoom level and location. By using a
+generic front end renderer and tile fetcher like HiGlass, we can use different
+server implementation to provision it with manageable chunks of data to view.
+
+
 
 
 <link rel="stylesheet" href="https://unpkg.com/higlass@1.1.5/dist/styles/hglib.css" type="text/css">
