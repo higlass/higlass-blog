@@ -1,0 +1,246 @@
+@import url("bootstrap/css/bootstrap.css");
+@import url("//fonts.googleapis.com/css?family=Overpass:300,600,800|Roboto+Mono");
+
+div .example {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+::-webkit-selection {
+  color: #fff;
+  background: #0F5D92;
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #0F5D92;
+}
+
+::selection {
+  color: #fff;
+  background: #0F5D92;
+}
+
+body {
+  font-family: 'Overpass', sans-serif;
+  font-size: 12pt;
+  font-weight: 300;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #444;
+}
+
+p {
+  line-height: 1.5;
+  text-align: left;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+li {
+  line-height: 1.5;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+code, pre {
+  font-family: 'Roboto+Mono', monospace;
+  color: #000;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.footer p {
+  text-align: center;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  background-size: 120px;
+  background-repeat:no-repeat;
+  background-position:right bottom;
+}
+
+.chart {
+  margin-top: 40px;
+  margin-bottom: 10px;
+}
+
+hr {
+  margin: 10px;
+}
+
+ul.header-links {
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+tr.post_list {
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Copied from:
+ *
+ * http://charliepark.org/
+ *
+ */
+div.meta_wrapper{border:1px solid #C9C6C3;border-width:1px 0;color:#666;font-size:12px;line-height:12px;margin:0 0 10px;padding:1px 0;text-transform:uppercase;height:20px;}
+
+div.post_list_meta{border:0px solid #C9C6C3;border-width:0px 0;color:#666;font-size:12px;line-height:12px;margin:0 0 0px;padding:1px 0;text-transform:uppercase;height:20px;}
+
+
+td.archive_date {
+  font-size: 13px;
+}
+
+h1, h2 {
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  margin: 20px 0 20px;
+  color: #000;
+}
+
+h1 {
+  font-size: 35px;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 26px;
+  line-height: 30px;
+}
+
+h3 {
+  font-weight: 500;
+  color: #000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.15s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+a:hover {
+  color: #0F5D92;
+  box-shadow: inset 0 -1px 0 0 #0F5D92;
+  text-decoration: none;
+}
+
+a:focus {
+  color: #0F5D92;
+  background: rgba(15, 93, 146, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(15, 93, 146, 0.95);
+  outline: none;
+  border-radius: 0.125rem;
+  text-decoration: none;
+}
+
+.header h1 {
+  text-align: center;
+  font-size: 80px;
+}
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 20pt;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+  font-size: 10pt;
+}
+
+.nav li a {
+  padding-top: 15px;
+  color: #A3BFCF;
+  font-size: 9pt;
+  font-weight: bold;
+}
+
+/* Customize container */
+  .container {
+    max-width: 550px;
+  }
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 26px;
+}
+
+.marketing h4 {
+  font-size: 17px;
+}
+
+.centered {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+  padding-left: 0;
+  padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+  margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+  border-bottom: 0;
+  }
+}
+
+.highlight {
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.post-list-thumbnail {
+  padding: 5px 15px 5px 5px;
+}
+
+.post-list-title {
+  margin-top: 15px;
+}
