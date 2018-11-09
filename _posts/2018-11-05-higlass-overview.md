@@ -3,7 +3,7 @@ layout: post
 title:  "Big data visualization using HiGlass"
 description: "Using HiGlass to view and explore large datasets."
 tags: higlass python
-thumbnail: 
+thumbnail:
 ---
 
 The past decade has seen tremendous advances in the field of data
@@ -11,17 +11,17 @@ visualization.  Libraries such as D3.js have made it not only possible but easy
 to create complex, informative and beautiful visualizations. Vega and vega lite
 introduced declarative specifications for describing both how data should be
 plotted and how the user should interact with it. A cadre of other libraries
-and services let people create interactive plots that they can share in 
+and services let people create interactive plots that they can share in
 web browsers.
 
 Most of these tools and libraries, however, have one glaring limitation. They
 require loading and operating on the the entire dataset. This precludes their
 use with data too large to fit into memory or to render at once. Even with
 smaller datasets, issues such as occlusion and overplotting can make it
-difficult to explore and analyze data. This need not be the case. 
+difficult to explore and analyze data. This need not be the case.
 We already have techniques that allow us to break
 down large datasets into smaller, digestible chunks which can be displayed
-without overwhelming the rendering library or viewer. 
+without overwhelming the rendering library or viewer.
 
 ## Inspired by maps
 
@@ -52,7 +52,7 @@ amount of data that needs to be loaded and rendered.
 </div>
 
 This technique makes it possible to access terabyte-scale datasets on hardware
-as basic as a mobile phone. Can we learn from this approach and apply it to 
+as basic as a mobile phone. Can we learn from this approach and apply it to
 other types of data? We certainly can. It just requires defining and implementing
 two operations on a set of data:
 
@@ -73,25 +73,25 @@ dimensional data, regardless of its size.
 
 Until recently, there were few datasets that were too large to
 display at once, worth viewing in the their entirety and relevant at multiple
-scales. Maps, of course, are one. Genomes are another. The human genome is 
+scales. Maps, of course, are one. Genomes are another. The human genome is
 over 3 billion base pairs long. If stretched end to end it would span nearly
-two meters. In each cell of the human body, it is exquisitely packed into a 
+two meters. In each cell of the human body, it is exquisitely packed into a
 nucleus that is roughly 10 micrometers across (depending on the cell). That
 is the equivalent of packing a 50 mile long string into a volume roughly the
 size of a basketball. Needless to say, it's a snug fit.
 
 The question that, through a long and winding journey, led to this blog post
-is "what is the shape of DNA inside the nucleus of a cell?". To answer this 
+is "what is the shape of DNA inside the nucleus of a cell?". To answer this
 question, a number of research groups perform what are known as Hi-C assays.
 These assays survey which parts of the genome are in contact with each other.
-The results come in the form of a matrix. On one axis is the genome and on 
+The results come in the form of a matrix. On one axis is the genome and on
 the other, the same genome. Each cell contains a *count* of how many times
 the assay "caught" those two portions of the genome in close proximity to
 each other. To make things statistically simpler, each "portion" of the genome
 is a segment one thousand nucleotides in length. So in the end, we end up
-with a 3 million x 3 million matrix describing how the DNA is folded within 
+with a 3 million x 3 million matrix describing how the DNA is folded within
 the nucleus. If you took this matrix and plotted it, you would see chromosomes,
-compartments and TADs, all at different scales. But how does one plot a 
+compartments and TADs, all at different scales. But how does one plot a
 3 million by 3 million matrix?
 
 ## Downsampling and slicing
@@ -99,14 +99,14 @@ compartments and TADs, all at different scales. But how does one plot a
 With current technology, there is simply no way to plot a 3 million x 3 million
 matrix at once. To do so would require an monitor the size of the empire state
 building. But we don't have to plot it once. We can be like maps and only show
-what is relevant given the scale and location. As we mentioned earlier, this 
+what is relevant given the scale and location. As we mentioned earlier, this
 requires the ability to downsample and slice. When zoomed out, we want to see
 a downsampled data such that each cell represents more than the original one
 thousand base pairs. When zoomed in, we want to see the subset of data that is
 visible in the viewport.
 
 With a matrix, these operations are simple. Downsampling can be done
-by summing adjacent cells of the matrix: 
+by summing adjacent cells of the matrix:
 
 ```python
 >>> import numpy as np
@@ -195,7 +195,7 @@ Over the past two and a half years we created HiGlass, a multiscale viewer for
 any type of large data. The interaction is the same as in online maps. You can
 pan and zoom and we only request resolution- and location- relevant data from
 the server. **No matter how much data there is, the browser is never overloaded
-and interaction remains smooth and responsive.** For proof, here is a 3 million 
+and interaction remains smooth and responsive.** For proof, here is a 3 million
 by 3 million matrix displayed in a web browser.
 
 <div class="wp-caption alignleft" style="width: 550px; margin-bottom: 15px">
@@ -207,8 +207,6 @@ by 3 million matrix displayed in a web browser.
 	the color scale without having to re-retrieve data from the server.</p>
 </div>
 
-<br />
-
 This data spans over 3 billion base pairs. At the highest resolution, each
 pixel represents the number of contacts between two 1 kilo-base regions of the
 genome. The data is is pre-aggregated at 14 levels of resolution and stored on
@@ -218,7 +216,7 @@ instance, fulfills each client tile request by slicing out the relevant region
 and returning it as a JSON object containing a base64 formatted string.
 Combining tile extraction with a caching server leads to 99% of responses
 being generated in less than 100ms. With a good internet connection, this
-makes for a fast, responsive user  experience when browsing the data.
+makes for a fast user experience when browsing the data.
 
 
 
@@ -233,15 +231,14 @@ HiGlass.
 
 <div class="wp-caption alignleft" style="width: 275px">
     <div id="mandelbrot" style="height: 400px"></div>
-    <p class="wp-caption-text">The Mandelbrot set can be rendered as a multiscale dataset. 
+    <p class="wp-caption-text">The Mandelbrot set can be rendered as a multiscale dataset.
     Zooming, limited to 25 levels to avoid hitting floating point precision
     artifacts. <a href="http://higlass.io/app/?config=X36M4xrtS3iPFCp7cFigUQ">[fullscreen]</a></p>
 </div>
-<br />
 
 According to Wikipedia, "The Mandelbrot set is the set of complex numbers $c$
 for which the function $f_{c}(z)=z^{2}+c$ does not diverge
-when iterated from $z=0$, i.e., for which the sequence  $f_{c}(0)$, 
+when iterated from $z=0$, i.e., for which the sequence  $f_{c}(0)$,
 $f_{c}(f_{c}(0))$, etc., remains bounded in absolute value." The essence of
 this definition is that for any complex number, $c$, we can calculate whether
 it is part of the Mandelbrot set by iteratively applying $f_{c}$. Furthermore,
@@ -250,7 +247,7 @@ we need to apply $f_{c}$ before the absolute value of $c$ exceeds a certain
 threshold (e.g. 2). Because a complex number can be represented by two components,
 the real and the imaginary, any pixel with a $x$ and
 the $y$ value can be used to represent a complex number. By counting the number
-of iterations it takes to exceed the threshold we can calculate a color for 
+of iterations it takes to exceed the threshold we can calculate a color for
 each pixel and render the traditional Mandelbrot set (Figure 3).
 
 So what about zooming? If we assign scales to the x- and y- axes of a figure
