@@ -44,7 +44,7 @@ and the number of tiles visible at any given time, we effectively limit the
 amount of data that needs to be loaded and rendered.
 
 
-<div class="wp-caption alignleft" style="width: 550px; margin-bottom: 15px">
+<div class="wp-caption alignleft" style="width: 400px; margin-bottom: 15px">
 	<div id="maps-and-tiles" style="height: 300px"> </div>
 	<p class="wp-caption-text">Online maps are rendered by retrieving and stitching
 	together small images called *tiles*. The view on the right shows the tiles that
@@ -198,7 +198,7 @@ the server. **No matter how much data there is, the browser is never overloaded
 and interaction remains smooth and responsive.** For proof, here is a 3 million
 by 3 million matrix displayed in a web browser.
 
-<div class="wp-caption alignleft" style="width: 550px; margin-bottom: 15px">
+<div class="wp-caption alignleft" style="width: 400px; margin-bottom: 15px">
 	<div id="two-heatmaps" style="height: 300px"></div>
 	<p class="wp-caption-text">Using a maps-like, tile based rendering, we can interactively
 	navigate massive 3 million x 3 million matrices. On the left is just matrix
