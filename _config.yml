@@ -2,5 +2,5 @@ name: HiGlass Blog
 highlighter: rouge
 paginate: 3
 permalink: pretty
-url: http://blog.higlass.io
+url: http://higlass.github.io/higlass
 gems: [jekyll-paginate, jekyll-feed]
