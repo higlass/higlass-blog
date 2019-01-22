@@ -15,7 +15,8 @@ layout: default
             <li> {{tag}} </li>
             {% endfor %}
             <li> | </li>
-            <li><a href="{{ site.url + page.url }}"><i class="fa fa-link"></i></a></li>
+	    {% capture final_url %}{{ site.url }}{{ page.url }}{% endcapture %}
+            <li><a href="{{ final_url }}"><i class="fa fa-link"></i></a></li>
     </ul>
     </div>
 
