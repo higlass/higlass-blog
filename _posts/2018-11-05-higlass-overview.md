@@ -146,7 +146,7 @@ resolution.  So zoom level 14 will contain data at 1Kb resolution, zoom level
 13 will contain data at 2Kb resolution, zoom level 12 at 4Kb, etc. If we know
 the original resolution of our data, we can calculate the number of zoom
 levels required to end up with one tile at the lowest resolution (thanks
-to [@nv1ctus](https://twitter.com/nv1ctus?lang=en) for the snippet below):
+to [@nv1ctus](https://twitter.com/nv1ctus) for the snippet below):
 
 ```python
 bins_per_tile = 256 	# the default, but can be set to anything
@@ -211,7 +211,7 @@ This data spans over 3 billion base pairs. At the highest resolution, each
 pixel represents the number of contacts between two 1 kilo-base regions of the
 genome. The data is is pre-aggregated at 14 levels of resolution and stored on
 disk as HDF5 matrices according to the schema defined by the  [cooler
-format](http://github.com/mirnylab/cooler). The server, running on an AWS EC2
+format](https://github.com/mirnylab/cooler). The server, running on an AWS EC2
 instance, fulfills each client tile request by slicing out the relevant region
 and returning it as a JSON object containing a base64 formatted string.
 Combining tile extraction with a caching server leads to 99% of responses
@@ -233,7 +233,7 @@ HiGlass.
     <div id="mandelbrot" style="height: 400px"></div>
     <p class="wp-caption-text">The Mandelbrot set can be rendered as a multiscale dataset.
     Zooming, limited to 25 levels to avoid hitting floating point precision
-    artifacts. <a href="http://higlass.io/app/?config=X36M4xrtS3iPFCp7cFigUQ">[fullscreen]</a></p>
+    artifacts. <a href="https://higlass.io/app/?config=X36M4xrtS3iPFCp7cFigUQ">[fullscreen]</a></p>
 </div>
 
 According to Wikipedia, "The Mandelbrot set is the set of complex numbers $c$
