@@ -103,38 +103,10 @@
  */
 
 /* 640px */
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 50em) {
   .wrap {
-    margin-left: 8.3334%; /* 1/12 */
-    margin-right: 8.3334%;
-  }
-
-  .video {
-    width: 90%;
-  }
-}
-
-/* 960px */
-@media screen and (min-width: 60em) {
-  .wrap {
-    margin-left: 11.1112%; /* 1/9 */
-    margin-right: 11.1112%;
-  }
-}
-
-/* 1280px */
-@media screen and (min-width: 80em) {
-  .wrap {
-    margin-left: 16.66667%; /* 1/6 */
-    margin-right: 16.66667%;
-  }
-}
-
-/* 1600px */
-@media screen and (min-width: 100em) {
-  .wrap {
-    margin-left: 20%; /* 1/5 */
-    margin-right: 20%;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
