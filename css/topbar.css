@@ -312,6 +312,7 @@
 }
 .top-bar nav li {
   line-height: inherit;
+  left: 0;
 }
 .top-bar nav li.separated-left::before {
   content: "";
