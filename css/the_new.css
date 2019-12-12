@@ -23,11 +23,11 @@ div .example {
 
 body {
   font-family: 'Overpass', sans-serif;
-  font-size: 13pt;
+  font-size: 16px;
   font-weight: 300;
-  padding-top: 20px;
-  padding-bottom: 20px;
   color: #444;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 p {
@@ -204,9 +204,14 @@ a:focus {
 
 /* Customize container */
 .container {
-  max-width: 700px;
+  max-width: 50rem;
   width: auto;
-  margin: 0 16px;
+  margin: 0 1rem;
+}
+
+body > .container {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .container-narrow > hr {
@@ -241,7 +246,8 @@ a:focus {
 
 @media screen and (min-width: 480px) {
   .container {
-    margin: 0 24px;
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }
 
@@ -263,13 +269,15 @@ a:focus {
   }
 
   .container {
-    margin: 0 60px;
+    margin-left: 60px;
+    margin-right: 60px;
   }
 }
 
 @media screen and (min-width: 1080px) {
   .container {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 

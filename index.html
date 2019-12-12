@@ -16,7 +16,8 @@ title: HiGlass Blog
             <li> {{tag}} </li>
             {% endfor %}
             <li> | </li>
-            <li><a href="{{ site.url + post.url }}"><i class="fa fa-link"></i></a></li>
+            {% capture final_url %}{{ site.url }}{{ post.url }}{% endcapture %}
+            <li><a href="{{ final_url }}"><i class="fa fa-link"></i></a></li>
     </ul>
     </div>
 </div>
