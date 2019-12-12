@@ -286,7 +286,7 @@ server implementation to provision it with manageable chunks of data to view.
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.8.1/pixi.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
 
-<script src="https://unpkg.com/higlass@1.2.8/dist/hglib.js"></script>
+<script src="https://unpkg.com/higlass@1.7.2/dist/hglib.js"></script>
 <script src="{{ '/js/higlass-overview/index.js' | prepend: site.baseurl }}"></script>
 
 <script>
